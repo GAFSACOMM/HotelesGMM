@@ -1,0 +1,45 @@
+services:
+  backend-leaf:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8000"
+    depends_on:
+      - postgres-leaf
+    env_file:
+      - ./.env
+    environment:
+      - SERVER_NAME=${DOMAIN?Variable not set}
+      - SERVER_HOST=https://${DOMAIN?Variable not set}
+    volumes:
+      - ./backend/alembic:/app/alembic
+      - ./backend/app/:/app/app
+
+  frontend-leaf:
+    container_name: frontend-leaf
+    build:
+      context: ./frontend
+      target: dev
+    env_file:
+    - ./.env
+    restart: always
+    command: npm run dev
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /frontend/node_modules
+      - /frontend/.next
+    ports:
+      - 82:3000
+
+  postgres-leaf:
+    container_name: postgres-leaf
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: lunaroja
+      POSTGRES_PASSWORD: sedena
+      POSTGRES_DB: pjaguar
+    ports:
+      - "5436:5432"

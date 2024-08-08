@@ -1,0 +1,17 @@
+# App
+fastapi
+uvicorn==0.15.0
+gunicorn==20.1.0
+python-dotenv
+alembic
+passlib
+python-jose
+psycopg2==2.9.1
+
+# Database
+databases
+asyncpg==0.24.0
+sqlalchemy==1.4
+
+# Cache
+fastapi-limiter==0.1.6
