@@ -11,7 +11,7 @@ router = APIRouter()
 # @request_tracing(request)
 async def read_request_tracing_all(
     db: AsyncSession = Depends(deps.async_get_db),
-    current_user: model.Users = Depends(deps.get_current_user)
+    current_user = Depends(deps.get_current_user)
 ) -> Any:
     entities = await crud.request_tracing.get_multi(db=db)
     return entities
@@ -28,7 +28,7 @@ async def create_request_tracing(
 @router.delete("/delete_request_tracing/")
 async def delete_req_tracing(
     db: AsyncSession = Depends(deps.async_get_db),
-    current_user: model.Users = Depends(deps.get_current_user)
+    current_user = Depends(deps.get_current_user)
 ) -> Any:
     res = await crud.request_tracing.delete_req_tracing(db=db)
     return res
@@ -39,7 +39,7 @@ async def update_req_tracing(
     db: AsyncSession = Depends(deps.async_get_db),
     id: int,
     entity_in: schemas.RequestTracingUpdate,
-    current_user: model.Users = Depends(deps.get_current_user)
+    current_user = Depends(deps.get_current_user)
 ) -> Any:
     entity = await crud.request_tracing.get(db=db, id=id)
     if entity is None:

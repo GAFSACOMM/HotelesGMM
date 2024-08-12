@@ -1,3 +1,4 @@
+import httpx
 from jose import jwt
 from app.core import security
 from datetime import timedelta
@@ -12,8 +13,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 
+
 reusable_oauth2 = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.API_V1_STR}/login/access-token/"
+    tokenUrl=f"http://10.1.7.92:8000/api/v1/login/access-token/{settings.CODE_SYSTEM}"
 )
 
 def get_db() -> Generator:
@@ -28,72 +30,17 @@ async def async_get_db() -> AsyncGenerator:
     async with async_session() as session:
         yield session
 
-async def get_current_user(
-    db: AsyncSession = Depends(async_get_db),
-    token: str = Depends(reusable_oauth2)
-) -> model.Users:
-    try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
-        )
-        token_data = schemas.TokenPayload(**payload)
-    except (jwt.JWTError, ValidationError):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=EnumError.XSO_403_INVALID_CREDENTIALS.value,
-        )
-    user = await crud.users.get(db, id=token_data.sub)
-    if not user:
-        raise HTTPException(status_code=404, detail=EnumError.XSO_404_USER_NOT_FOUND.value)
-    else:
-        return user
 
-async def get_current_user_by_token(
-    token: str,
-    db: AsyncSession = Depends(async_get_db),
-) -> model.Users:
-    try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
+async def get_current_user(token: str = Depends(reusable_oauth2)):
+    async with httpx.AsyncClient() as client:
+        sso_response = await client.get(
+            f"http://10.1.7.92:8000/api/v1/access_system/getCurrentUserSSO/{settings.CODE_SYSTEM}",
+            headers={"Authorization": f"Bearer {token}"}
         )
-        token_data = schemas.TokenPayload(**payload)
-    except (jwt.JWTError, ValidationError):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=EnumError.XSO_403_INVALID_CREDENTIALS.value,
-        )
-    user = await crud.users.get(db, id=token_data.sub)
-    # token = Depends(reusable_oauth2)
-    
-    access_token_expires = timedelta(
-            minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    return {
-            "access_token": security.create_access_token(
-                user.id, expires_delta=access_token_expires
-            )
-        }, user
-        
+        sso_data = sso_response.json()
+    if sso_response.status_code != 200:
+        raise HTTPException(status_code=sso_response.status_code,
+                            detail="Fallo de obtener el usuario desde el SSO.")
+    if sso_response.status_code == 200:
+        return sso_data
 
-async def gen_new_token(
-    token: str,
-    db: AsyncSession = Depends(async_get_db),
-) -> model.Users:
-    try:
-        payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[security.ALGORITHM]
-        )
-        token_data = schemas.TokenPayload(**payload)
-    except (jwt.JWTError, ValidationError):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=EnumError.XSO_403_INVALID_CREDENTIALS.value,
-        )
-    user = await crud.users.get(db, id=token_data.sub)
-    access_token_expires = timedelta(
-            minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    return {
-            "access_token": security.create_access_token(
-                user.id, expires_delta=access_token_expires
-            )
-        }
-        
