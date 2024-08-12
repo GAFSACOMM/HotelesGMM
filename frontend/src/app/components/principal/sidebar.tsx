@@ -1,17 +1,22 @@
-'use client';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import '../../styles/sidebar.css';
 
-const Sidebar: React.FC = () => {
-    return (
-        <div className="w-64 h-full bg-gray-800 text-white">
-            <div className="p-4 text-2xl font-bold">Dashboard</div>
-            <ul>
-                <li className="p-4 hover:bg-gray-700"><Link to="/profile">Perfil</Link></li>
-                <li className="p-4 hover:bg-gray-700"><Link to="/logout">Cerrar sesión</Link></li>
-            </ul>
-        </div>
-    );
+interface SidebarProps {
+  className?: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+  return (
+    <div className={`w-64 bg-gray-800 text-white h-screen p-4 fixed ${className}`}>
+      <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+      <ul>
+        <li><a href="#" className="block py-2 px-4 hover:bg-gray-700">Inicio</a></li>
+        <li><a href="#" className="block py-2 px-4 hover:bg-gray-700">Perfil</a></li>
+        <li><a href="#" className="block py-2 px-4 hover:bg-gray-700">Configuración</a></li>
+        <li><a href="#" className="block py-2 px-4 hover:bg-gray-700">Cerrar sesión</a></li>
+      </ul>
+    </div>
+  );
 };
 
 export default Sidebar;

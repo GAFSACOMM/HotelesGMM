@@ -1,0 +1,37 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Opcional: Para evitar el scroll horizontal */
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.w-64 {
+    width: 16rem; /* 64 * 0.25rem (tailwind base unit) */
+}
+
+.bg-gray-800 {
+    background-color: #2d3748; /* Tailwind color gray-800 */
+}
+
+.text-white {
+    color: white;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.p-4 {
+    padding: 1rem; /* Tailwind padding */
+}
+
+/* Ajustes faltantes, me falta estilo :) */
