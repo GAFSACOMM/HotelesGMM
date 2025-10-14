@@ -1,7 +1,8 @@
 import secrets
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, ClassVar
 import logging
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
+from pydantic_settings import BaseSettings
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,14 +17,14 @@ class Settings(BaseSettings):
     API_DOMAIN: str = "http://10.1.7.92:8005"
     SECRET_KEY: str = secrets.token_urlsafe(32)
     # ! CREAR NUEVA EXPIRACIÓN PARA QUE SEA CORTA
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 8
     JOB_ACCESS_TOKEN_EXPIRE_MINUTES: int = 1
     SERVER_NAME: str
     SERVER_HOST: AnyHttpUrl
     BACKEND_CORS_ORIGINS: List[Union[AnyHttpUrl, str]] = []
     TEST_MODE: bool = False
     PROFILE_QUERY_MODE: bool = False
-    ARBITRARY_TYPES_ALLOWED = True
+    ARBITRARY_TYPES_ALLOWED: ClassVar[bool] = True
     CODE_SYSTEM: int = 5
     
     @validator("BACKEND_CORS_ORIGINS", pre=False)
@@ -45,8 +46,8 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
-    SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
-    SQLALCHEMY_DATABASE_URI_ASYNC: Optional[AsyncPostgresDsn] = None
+    SQLALCHEMY_DATABASE_URI: Optional[str] = None
+    SQLALCHEMY_DATABASE_URI_ASYNC: Optional[str] = None
 
     @validator("POSTGRES_DB", pre=True)
     def assemble_db_name(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
@@ -59,25 +60,14 @@ class Settings(BaseSettings):
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if isinstance(v, str):
             return v
-        return PostgresDsn.build(
-            scheme="postgresql",
-            user=values.get("POSTGRES_USER"),
-            password=values.get("POSTGRES_PASSWORD"),
-            host=values.get("POSTGRES_SERVER"),
-            path=f"/{values.get('POSTGRES_DB') or ''}",
-        )
+        return f"postgresql://{values['POSTGRES_USER']}:{values['POSTGRES_PASSWORD']}@{values['POSTGRES_SERVER']}/{values['POSTGRES_DB']}"
 
     @validator("SQLALCHEMY_DATABASE_URI_ASYNC", pre=True)
     def assemble_async_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if isinstance(v, str):
             return v
-        return AsyncPostgresDsn.build(
-            scheme="postgresql+asyncpg",
-            user=values.get("POSTGRES_USER"),
-            password=values.get("POSTGRES_PASSWORD"),
-            host=values.get("POSTGRES_SERVER"),
-            path=f"/{values.get('POSTGRES_DB') or ''}",
-        )
+        return f"postgresql+asyncpg://{values['POSTGRES_USER']}:{values['POSTGRES_PASSWORD']}@{values['POSTGRES_SERVER']}/{values['POSTGRES_DB']}"
+
 
     SMTP_TLS: bool = True
     SMTP_PORT: Optional[int] = None
@@ -93,7 +83,7 @@ class Settings(BaseSettings):
             return values["PROJECT_NAME"]
         return v
 
-    EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 24
+    EMAIL_RESET_TOKEN_EXPIRE_HOURS: int = 8
     EMAIL_TEMPLATES_DIR: str = "app/email-templates/build"
     EMAILS_ENABLED: bool = True
 
