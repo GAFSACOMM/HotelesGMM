@@ -54,7 +54,7 @@ def send_reset_password_email(email_to: str, email: str, token: str) -> None:
     server_host = settings.SERVER_HOST
     #! TODO: Cambiar a dominio
     #* SSO IP
-    link = f"http://10.1.7.92/resetPassword?token={token}"
+    link = f"http://10.110.156.176/resetPassword?token={token}"
     send_email(
         email_to=email_to,
         subject_template=subject,

@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import databases
 
 #* SSO IP
-DATABASE_URL = "postgresql://lunaroja:sedena@10.1.7.92:5432/pjaguar"
+DATABASE_URL = "postgresql://lunaroja:sedena@10.110.156.176:5432/pjaguar"
 
 database = databases.Database(DATABASE_URL)
 engine = create_engine(DATABASE_URL)

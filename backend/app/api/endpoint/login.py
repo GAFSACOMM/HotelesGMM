@@ -30,7 +30,7 @@ async def job_access_token(
     #* SSO IP
     async with httpx.AsyncClient() as client:
         response_sso = await client.post(
-            f"http://10.1.7.92:8000/api/v1/login/access-token/{settings.CODE_SYSTEM}",
+            f"http://10.110.156.176:8000/api/v1/login/access-token/{settings.CODE_SYSTEM}",
             data={"username": form_data.username, "password": form_data.password}
         )
 

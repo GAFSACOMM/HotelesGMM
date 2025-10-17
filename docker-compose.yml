@@ -4,7 +4,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8005:8000"
+      - "8001:8000"
     depends_on:
       - postgres-leaf
     env_file:
@@ -32,7 +32,7 @@ services:
       - /frontend/node_modules
       - /frontend/.next
     ports:
-      - 82:3000
+      - 3001:3000
 
   postgres-leaf:
     container_name: postgres-leaf
@@ -42,4 +42,4 @@ services:
       POSTGRES_PASSWORD: sedena
       POSTGRES_DB: pjaguar
     ports:
-      - "5436:5432"
+      - "5433:5432"

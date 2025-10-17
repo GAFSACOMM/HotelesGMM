@@ -1,7 +1,8 @@
-FROM node:18-alpine AS base
+FROM node:20-bookworm AS base
+
+RUN npm install -g npm@11.6.2
 
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -40,4 +41,3 @@ USER nextjs
 
 
 CMD ["node", "server.js"]
-#!sí
