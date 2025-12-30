@@ -1,10 +1,10 @@
-import React from 'react';
-import DashboardForm from './pages/dashboard';
+// app/page.tsx o pages/index.tsx
+import Page from "./dashboard/page";
 
 export default function Home() {
   return (
-    <main className="">
-      <DashboardForm />
+    <main>
+      <Page />
     </main>
   );
 }

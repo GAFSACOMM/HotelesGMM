@@ -1,0 +1,11 @@
+Agregar pagepara exponer una ruta, layoutpara una interfaz de usuario compartida como encabezado, navegación o pie de página, loadingpara esqueletos, errorpara límites de error y routepara API.
+___________________________________________________________________________
+layout  	   | .js .jsx .tsx	Disposición                     
+page	       | .js .jsx .tsx	Página                      
+loading	       | .js .jsx .tsx	Cargando la interfaz de usuario                     
+not-found	   | .js .jsx .tsx	No se encontró la interfaz de usuario                       
+error	       | .js .jsx .tsx	Error de interfaz de usuario                        
+global-error   | .js .jsx .tsx	Interfaz de usuario de error global                     
+route	       | .js .ts	    Punto final de API                      
+template	   | .js .jsx .tsx	Diseño re-renderizado                       
+default	       | .js .jsx .tsx	Página de respaldo de ruta paralela                     

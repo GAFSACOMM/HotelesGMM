@@ -1,0 +1,33 @@
+.
+├── app
+│   ├── dashboard
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── pages
+│   ├── page.tsx
+│   ├── schemas
+│   ├── services
+│   └── styles
+├── components
+│   ├── features
+│   ├── forms
+│   ├── layouts
+│   └── ui
+├── Dockerfile
+├── estructura.txt
+├── hooks
+├── lib
+│   └── models
+├── next.config.mjs
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── public
+│   ├── next.svg
+│   └── vercel.svg
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.json
+└── types
