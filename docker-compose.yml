@@ -1,23 +1,24 @@
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8001:8000"
-    depends_on:
-      - postgres
-    env_file:
-      - ./.env
-    environment:
-      - SERVER_NAME=${DOMAIN?Variable not set}
-      - SERVER_HOST=https://${DOMAIN?Variable not set}
-    volumes:
-      - ./backend/alembic:/app/alembic
-      - ./backend/app/:/app/app
+  # backend:
+  #   container_name: backend-hoteles
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8001:8000"
+  #   # depends_on:
+  #   #   - postgres
+  #   env_file:
+  #     - ./.env
+  #   environment:
+  #     - SERVER_NAME=${DOMAIN?Variable not set}
+  #     - SERVER_HOST=https://${DOMAIN?Variable not set}
+  #   volumes:
+  #     - ./backend/alembic:/app/alembic
+  #     - ./backend/app/:/app/app
 
   frontend:
-    container_name: frontend
+    container_name: frontend-hoteles
     build:
       context: ./frontend
       target: dev
@@ -34,12 +35,12 @@ services:
     ports:
       - 3001:3000
 
-  postgres:
-    container_name: postgres
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: lunaroja
-      POSTGRES_PASSWORD: sedena
-      POSTGRES_DB: pjaguar
-    ports:
-      - "5433:5432"
+  # postgres:
+  #   container_name: postgres-hoteles
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: 
+  #     POSTGRES_PASSWORD: 
+  #     POSTGRES_DB: 
+  #   ports:
+  #     - "5433:5432"

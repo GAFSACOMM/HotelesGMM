@@ -6,7 +6,7 @@ from pydantic import AnyHttpUrl, EmailStr, HttpUrl, PostgresDsn, validator, Conf
 
 logging.basicConfig(level=logging.INFO)
 
-PROJECT_NAME = 'api-rcd'
+PROJECT_NAME = 'api-hoteles-gmm'
 
 class AsyncPostgresDsn(PostgresDsn):
     allowed_schemes = {"postgres+asyncpg", "postgresql+asyncpg"}

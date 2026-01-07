@@ -7,7 +7,7 @@ import './styles/global.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Base Architecture',
+  title: 'Hoteles Mundo Maya',
   description: 'Proyecto que incluye la arquitectura basica para reutilización en los aplicativos',
 }
 

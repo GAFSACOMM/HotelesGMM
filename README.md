@@ -242,6 +242,28 @@ Sección	        Orden Recomendada
 7. Data         Fetching	getStaticProps, getServerSideProps
 ```
 
+## 📦 Instalación local
+
+Si el proyecto se descarga con la carpeta node_modules, ejecutar en raiz:
+```
+rm -rf node_modules package-lock.json
+```
+Accedemos a la carpeta Frontend para instalar dependencias
+```
+cd frontend/
+
+npm i
+```
+Regresamos a raiz para reconstruir y levantar los servicios
+```
+cd ..
+
+docker compose up --build
+```
+
+
+
+
 
 
 
