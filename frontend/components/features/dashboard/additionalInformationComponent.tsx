@@ -17,7 +17,7 @@ const AdditionalInformationComponent: React.FC<ComponentProps> = ({
                         <p className="text-center font-light text-gray-500">¿Por qué elegir un solo destino cuando puedes tenerlos todos?</p>
                         <p className="text-center font-light text-gray-500">Nuestra increíble red de hoteles, te abre las puertas a un mundo de maravillas arqueológicas.</p>
                     </div>
-                    <a href="https://grupomundomaya.com/index.html/servicios-turisticos/index.html" target="blank"
+                    <a href="https://grupomundomaya.com/index.html/servicios-turisticos/index.html" target="_blank"
                         className="text-danger mx-auto border-1 border-black rounded-full bg-neutral-primary border border-danger hover:bg-black hover:text-white focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-all duration-300 ease-in-out">
                         Saber Más
                     </a>
@@ -52,7 +52,7 @@ const AdditionalInformationComponent: React.FC<ComponentProps> = ({
                         <p className="text-center font-light text-gray-500">Hospedate en nuestro &quot;Hotel Tulum Aeropuerto&quot;, ya sea que vengas por trabajo o estés en tránsito hacia tu próxima aventura, aquí encontrarás el descanso ideal con el toque vibrante de Tulum.</p>
                         <p className="text-center font-bold text-gray-500">&quot;Hospédate inteligente, viaja sin límites&quot;</p>
                     </div>
-                    <a href="https://hotels.cloudbeds.com/es/reservation/MNljx2?currency=mxn" target="blank"
+                    <a href="https://hotels.cloudbeds.com/es/reservation/MNljx2?currency=mxn" target="_blank"
                         className="text-danger mx-auto border-1 border-black rounded-full bg-neutral-primary border border-danger hover:bg-black hover:text-white focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-all duration-300 ease-in-out">
                         Reservar
                     </a>
