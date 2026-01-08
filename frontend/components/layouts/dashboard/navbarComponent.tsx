@@ -6,53 +6,57 @@ interface ComponentProps {
 
 const NavbarComponent: React.FC<ComponentProps> = () => {
     return (
-        <div className="fixed top-0 right-0 left-0 z-50">
-            <nav className="bg-black w-full h-24">
-                <div className="max-w-screen-xl flex items-center justify-between mx-auto px-1">
-                    <a href="#" className="flex items-center">
-                        <Image className="w-15 h-24" alt="Logo GMM" src={"/images/Copia-de-Hoteles-general-01.png"} width={200} height={100} />
-                    </a>
-
-                    <div className="hidden md:flex items-center justify-end flex-1 py-6" id="navbar-user">
-                        <ul className="flex items-center space-x-8 rtl:space-x-reverse">
-                            <li>
-                                <a href="#" className="text-white hover:text-teal-600 transition-colors py-2 rounded" aria-current="page">Inicio</a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-white hover:text-teal-600 transition-colors py-2 rounded">¿Quiénes Somos?</a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-white hover:text-teal-600 transition-colors py-2 rounded">Promociones</a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-white hover:text-teal-600 transition-colors py-2 rounded">Paquetes de verano</a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-white hover:text-teal-600 transition-colors py-2 rounded">Hoteles</a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-slate-100 hover:text-slate-50 rounded-full bg-teal-800 hover:bg-teal-600 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 text-sm px-3 py-2 focus:outline-none transition-all duration-300 ease-in-out">
-                                    Contactános
-                                </a>
-                            </li>
-                        </ul>
+        <nav className="fixed top-0 right-0 left-0 z-50 bg-black h-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+                <div className="flex items-center justify-between h-full">
+                    {/* Logo */}
+                    <div className="flex-shrink-0">
+                        <a href="#" className="block">
+                            <Image 
+                                className="w-auto h-20 object-contain" 
+                                alt="Logo GMM" 
+                                src="/images/Copia-de-Hoteles-general-01.png" 
+                                width={180} 
+                                height={80} 
+                            />
+                        </a>
                     </div>
 
+                    {/* Menú desktop */}
+                    <div className="hidden md:flex items-center space-x-8">
+                        <a href="#" className="text-white hover:text-teal-500 transition-colors duration-300 text-sm font-medium">
+                            Inicio
+                        </a>
+                        <a href="#" className="text-white hover:text-teal-500 transition-colors duration-300 text-sm font-medium">
+                            ¿Quiénes Somos?
+                        </a>
+                        <a href="#" className="text-white hover:text-teal-500 transition-colors duration-300 text-sm font-medium">
+                            Promociones
+                        </a>
+                        <a href="#" className="text-white hover:text-teal-500 transition-colors duration-300 text-sm font-medium">
+                            Paquetes de verano
+                        </a>
+                        <a href="#" className="text-white hover:text-teal-500 transition-colors duration-300 text-sm font-medium">
+                            Hoteles
+                        </a>
+                        <button className="bg-teal-700 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105">
+                            Contactános
+                        </button>
+                    </div>
 
-                    {/* Menú móvil (hamburguesa)*/}
+                    {/* Menú móvil */}
                     <button
                         type="button"
-                        className="md:hidden text-white p-2"
+                        className="md:hidden text-white p-2 focus:outline-none"
                         aria-label="Abrir menú"
                     >
-                        {/* Icono hamburguesa */}
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     );
 };
 
